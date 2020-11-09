@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class UserDaoTest {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        ApplicationContext context = new GenericXmlApplicationContext("chapter1/applicationContext.xml");
 
         UserDao dao = context.getBean("userDao", UserDao.class);
 
