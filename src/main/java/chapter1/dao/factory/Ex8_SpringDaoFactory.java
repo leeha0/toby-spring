@@ -15,7 +15,7 @@ public class Ex8_SpringDaoFactory {
     }
 
     @Bean
-    private ConnectionMaker connectionMaker() {
+    public ConnectionMaker connectionMaker() {
         return new DConnectionMaker();
     }
 }
