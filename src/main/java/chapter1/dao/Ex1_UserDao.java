@@ -4,10 +4,31 @@ import chapter1.domain.User;
 
 import java.sql.*;
 
-public class UserDao_ExtractMethod {
+public class Ex1_UserDao {
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        Ex1_UserDao dao = new Ex1_UserDao();
+
+        User user = new User();
+        user.setId("whiteship");
+        user.setName("백기선");
+        user.setPassword("married");
+
+        dao.add(user);
+
+        System.out.println(user.getId() + " 등록 성공");
+
+        User user2 = dao.get(user.getId());
+        System.out.println(user2.getName());
+
+        System.out.println(user2.getPassword());
+
+        System.out.println(user2.getId() + "조회 성공");
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = getConnection();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book");
 
         PreparedStatement ps = c.prepareStatement(
                 "insert into users(id, name, password) values (?, ?, ?)");
@@ -22,7 +43,8 @@ public class UserDao_ExtractMethod {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = getConnection();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book");
 
         PreparedStatement ps = c.prepareStatement(
                 "select * from users where id = ?");
@@ -40,11 +62,5 @@ public class UserDao_ExtractMethod {
         c.close();
 
         return user;
-    }
-
-    // 메서드 추출을 통해 중복 제거
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book");
     }
 }
