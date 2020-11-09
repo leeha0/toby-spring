@@ -1,7 +1,7 @@
 package chapter1.dao;
 
 import chapter1.connection.ConnectionMaker;
-import chapter1.connection.Ex4_DConnectionMaker;
+import chapter1.connection.DConnectionMaker;
 import chapter1.domain.User;
 
 import java.sql.Connection;
@@ -15,7 +15,7 @@ public class Ex5_InterfaceUserDao {
 
     public Ex5_InterfaceUserDao() {
         // 여전히 특정 클래스를 사용
-        connectionMaker = new Ex4_DConnectionMaker();
+        connectionMaker = new DConnectionMaker();
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
