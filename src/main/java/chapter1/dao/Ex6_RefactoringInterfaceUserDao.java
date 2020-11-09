@@ -1,7 +1,6 @@
 package chapter1.dao;
 
 import chapter1.connection.ConnectionMaker;
-import chapter1.connection.Ex4_DConnectionMaker;
 import chapter1.domain.User;
 
 import java.sql.Connection;
@@ -9,13 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Ex5_InterfaceUserDao {
+public class Ex6_RefactoringInterfaceUserDao {
 
     private ConnectionMaker connectionMaker;
 
-    public Ex5_InterfaceUserDao() {
-        // 여전히 특정 클래스를 사용
-        connectionMaker = new Ex4_DConnectionMaker();
+    public Ex6_RefactoringInterfaceUserDao(ConnectionMaker connectionMaker) {
+        // 관계 설정을 외부에서 주입
+        this.connectionMaker = connectionMaker;
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
