@@ -1,26 +1,33 @@
 package chapter2;
 
-import chapter1.domain.User;
-import chapter2.dao.UserDao;
-
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.dao.EmptyResultDataAccessException;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
+
+import chapter1.domain.User;
+import chapter2.dao.UserDao;
 
 public class UserDaoTest {
 
-    @Test
-    public void addAndGet() throws SQLException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("chapter2/applicationContext.xml");
+    private UserDao dao;
+
+    @Before
+    public void setUp() {
+        // ApplicationContext context = new ClassPathXmlApplicationContext("chapter2/applicationContext.xml");
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 
         UserDao dao = context.getBean("userDao", UserDao.class);
+    }
+
+    @Test
+    public void addAndGet() throws SQLException {
         User user1 = new User("gyumee", "박성철", "springno1");
         User user2 = new User("leegw700", "이길원", "springno2");
 
@@ -46,9 +53,6 @@ public class UserDaoTest {
 
     @Test
     public void count() throws SQLException {
-        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-
-        UserDao dao = context.getBean("userDao", UserDao.class);
         User user1 = new User("gyumee", "박성철", "springno1");
         User user2 = new User("leegw700", "이길원", "springno2");
         User user3 = new User("bumjin", "박범진", "springno3");
@@ -68,9 +72,6 @@ public class UserDaoTest {
 
     @Test(expected = EmptyResultDataAccessException.class)
     public void getUserFailure() throws SQLException {
-        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-
-        UserDao dao = context.getBean("userDao", UserDao.class);
         dao.deleteAll();
         assertThat(dao.getCount(), is(0));
 
