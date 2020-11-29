@@ -11,13 +11,12 @@ import chapter2.dao.UserDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/applicationContext.xml")
-public class SpringUseDaoTest {
+public class SpringUseDaoTest2 {
 
     @Autowired
-    private ApplicationContext context;
     private UserDao dao;
 
+    @Before
     public void setUp() {
-        this.dao = this.context.getBean("userDao", UserDao.class);
     }
 }
