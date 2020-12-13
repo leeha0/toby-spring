@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import chapter1.domain.User;
+import chapter3.statement.AddStatement;
 import chapter3.statement.DeleteAllStatement;
 import chapter3.statement.StatementStrategy;
 
@@ -18,6 +20,11 @@ public class UserDaoStrategy {
         // 전략 오브젝트 생성
         StatementStrategy st = new DeleteAllStatement();
         // 컨텍스트 호출 및 전략 전달
+        jdbcContextWithStatementStrategy(st);
+    }
+
+    public void add(User user) throws SQLException {
+        StatementStrategy st = new AddStatement(user);
         jdbcContextWithStatementStrategy(st);
     }
 
