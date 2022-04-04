@@ -1,4 +1,4 @@
-package chapter1.dao;
+package chapter1.dao.v3;
 
 import java.sql.Connection;
 import java.sql.SQLException;

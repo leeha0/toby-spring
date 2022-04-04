@@ -9,8 +9,9 @@ public class SingleTonePattern {
     }
 
     public static synchronized SingleTonePattern getInstance() {
-        if (INSTANCE == null)
+        if (INSTANCE == null) {
             INSTANCE = new SingleTonePattern();
+        }
 
         return INSTANCE;
     }

@@ -1,8 +1,8 @@
 package chapter1;
 
 import chapter1.connection.CountingConnectionMaker;
-import chapter1.dao.Ex6_RefactoringInterfaceUserDao;
-import chapter1.dao.factory.Ex12_CountingDaoFactory;
+import chapter1.dao.v6.Ex6_RefactoringInterfaceUserDao;
+import chapter1.dao.Ex12_CountingDaoFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Ex12_UserDaoConnectionCountingTest {

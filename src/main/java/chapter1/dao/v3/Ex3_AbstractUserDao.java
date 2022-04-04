@@ -1,28 +1,16 @@
-package chapter1.dao;
+package chapter1.dao.v3;
 
-import chapter1.connection.ConnectionMaker;
-import chapter1.connection.DConnectionMaker;
 import chapter1.domain.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class Ex5_InterfaceUserDao {
-
-    private ConnectionMaker connectionMaker;
-
-    public Ex5_InterfaceUserDao() {
-        // 여전히 특정 클래스를 사용
-        connectionMaker = new DConnectionMaker();
-    }
+public abstract class Ex3_AbstractUserDao {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+        Connection c = getConnection();
 
         PreparedStatement ps = c.prepareStatement(
-                "insert into users(id, name, password) values (?, ?, ?)");
+            "insert into users(id, name, password) values (?, ?, ?)");
         ps.setString(1, user.getId());
         ps.setString(2, user.getName());
         ps.setString(3, user.getPassword());
@@ -34,10 +22,10 @@ public class Ex5_InterfaceUserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+        Connection c = getConnection();
 
         PreparedStatement ps = c.prepareStatement(
-                "select * from users where id = ?");
+            "select * from users where id = ?");
         ps.setString(1, id);
 
         ResultSet rs = ps.executeQuery();
@@ -53,4 +41,6 @@ public class Ex5_InterfaceUserDao {
 
         return user;
     }
+
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 }

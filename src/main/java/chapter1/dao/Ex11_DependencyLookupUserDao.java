@@ -1,7 +1,7 @@
 package chapter1.dao;
 
 import chapter1.connection.ConnectionMaker;
-import chapter1.dao.factory.Ex8_SpringDaoFactory;
+import chapter1.dao.v8.Ex8_SpringDaoFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Ex11_DependencyLookupUserDao {

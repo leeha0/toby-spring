@@ -1,8 +1,7 @@
-package chapter1;
+package chapter1.dao.v6;
 
 import chapter1.connection.ConnectionMaker;
 import chapter1.connection.DConnectionMaker;
-import chapter1.dao.Ex6_RefactoringInterfaceUserDao;
 
 public class Ex6_UserDaoTest {
 

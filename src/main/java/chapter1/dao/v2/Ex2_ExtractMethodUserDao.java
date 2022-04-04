@@ -1,27 +1,16 @@
-package chapter1.dao;
+package chapter1.dao.v2;
 
-import chapter1.connection.ConnectionMaker;
 import chapter1.domain.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class Ex6_RefactoringInterfaceUserDao {
-
-    private ConnectionMaker connectionMaker;
-
-    public Ex6_RefactoringInterfaceUserDao(ConnectionMaker connectionMaker) {
-        // 관계 설정을 외부에서 주입
-        this.connectionMaker = connectionMaker;
-    }
+public class Ex2_ExtractMethodUserDao {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+        Connection c = getConnection();
 
         PreparedStatement ps = c.prepareStatement(
-                "insert into users(id, name, password) values (?, ?, ?)");
+            "insert into users(id, name, password) values (?, ?, ?)");
         ps.setString(1, user.getId());
         ps.setString(2, user.getName());
         ps.setString(3, user.getPassword());
@@ -33,10 +22,10 @@ public class Ex6_RefactoringInterfaceUserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+        Connection c = getConnection();
 
         PreparedStatement ps = c.prepareStatement(
-                "select * from users where id = ?");
+            "select * from users where id = ?");
         ps.setString(1, id);
 
         ResultSet rs = ps.executeQuery();
@@ -51,5 +40,11 @@ public class Ex6_RefactoringInterfaceUserDao {
         c.close();
 
         return user;
+    }
+
+    // 메서드 추출을 통해 중복 제거
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        return DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book");
     }
 }

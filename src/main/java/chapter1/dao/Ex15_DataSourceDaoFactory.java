@@ -1,4 +1,4 @@
-package chapter1.dao.factory;
+package chapter1.dao;
 
 import chapter1.dao.Ex15_DataSourceUserDao;
 import org.springframework.context.annotation.Bean;

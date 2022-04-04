@@ -1,6 +1,5 @@
-package chapter1.dao;
+package chapter1.dao.v4;
 
-import chapter1.connection.Ex4_SimpleConnectionMaker;
 import chapter1.domain.User;
 
 import java.sql.Connection;
@@ -13,7 +12,7 @@ public class Ex4_ClassSeparationUserDao {
     private Ex4_SimpleConnectionMaker simpleConnectionMaker;
 
     public Ex4_ClassSeparationUserDao() {
-        // 특정 클래스를 사용하며 해당 클래스의 인터페이스에 한정 됨
+        // 특정 클래스에 한정되 기능을 변경할 수 없음
         simpleConnectionMaker = new Ex4_SimpleConnectionMaker();
     }
 
@@ -21,7 +20,7 @@ public class Ex4_ClassSeparationUserDao {
         Connection c = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement ps = c.prepareStatement(
-                "insert into users(id, name, password) values (?, ?, ?)");
+            "insert into users(id, name, password) values (?, ?, ?)");
         ps.setString(1, user.getId());
         ps.setString(2, user.getName());
         ps.setString(3, user.getPassword());
@@ -36,7 +35,7 @@ public class Ex4_ClassSeparationUserDao {
         Connection c = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement ps = c.prepareStatement(
-                "select * from users where id = ?");
+            "select * from users where id = ?");
         ps.setString(1, id);
 
         ResultSet rs = ps.executeQuery();

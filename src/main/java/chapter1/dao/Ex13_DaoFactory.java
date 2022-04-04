@@ -1,4 +1,4 @@
-package chapter1.dao.factory;
+package chapter1.dao;
 
 import chapter1.connection.ConnectionMaker;
 import chapter1.connection.DConnectionMaker;

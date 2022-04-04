@@ -1,8 +1,8 @@
-package chapter1.dao.factory;
+package chapter1.dao.v7;
 
 import chapter1.connection.ConnectionMaker;
 import chapter1.connection.DConnectionMaker;
-import chapter1.dao.Ex6_RefactoringInterfaceUserDao;
+import chapter1.dao.v6.Ex6_RefactoringInterfaceUserDao;
 
 public class Ex7_DaoFactory {
 
